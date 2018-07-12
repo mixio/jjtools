@@ -3,9 +3,9 @@ import Foundation
 public func jjprint(_ items: Any..., file: String = #file, line: Int = #line) {
     if let path = jjTruncatedPathToSources(file) {
         let header = """
-        ------------------------------
-        \(path):\(line)
-        ------------------------------
+        +-----------------------------
+        | 📄 | \(path):\(line)
+        +-----------------------------
         """
         print(header)
     }
