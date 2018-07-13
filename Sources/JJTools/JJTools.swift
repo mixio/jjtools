@@ -23,7 +23,7 @@ public func jjprintex(_ items: Any..., file: String = #file, line: Int = #line) 
     }
     print(items)
 
-    let stackTrace = Thread.callStackSymbols
+    let stackTrace = Thread.callStackSymbols.joined(separator: "\n")
     print("+-----------------------------")
     print(stackTrace)
     print("+-----------------------------")
