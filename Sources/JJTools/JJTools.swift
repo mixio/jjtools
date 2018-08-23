@@ -33,20 +33,18 @@ public func jjprintex(_ items: Any..., file: String = #file, line: Int = #line) 
 private func jjTruncatedPathToSources(_ path: String) -> String? {
     var pathComponents = path.split(separator: "/")
     var indexOfSources: Array<[String.SubSequence]>.Index? = nil
-#if os(Linux)
+
+#if swift(>=4.2)
+    indexOfSources = pathComponents.firstIndex(of: "Sources")
+#else
     for (index, component) in pathComponents.enumerated() {
         if component == "Sources" {
             indexOfSources = index
             break
         }
     }
-#else
-    if #available(macOS 10.4, *) {
-        indexOfSources = pathComponents.firstIndex(of: "Sources")
-    } else {
-        indexOfSources = pathComponents.firstIndex(where: { $0 == "Sources" })
-    }
 #endif
+
     if let indexOfSources = indexOfSources {
         pathComponents.removeFirst(indexOfSources + 1)
         let truncatedPath = pathComponents.joined(separator: "/")
