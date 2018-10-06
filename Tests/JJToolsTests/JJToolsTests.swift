@@ -6,7 +6,10 @@ final class JJToolsTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(JJTools().text, "Hello, World!")
+        let variable = "toto"
+        let reflection = String(reflecting: variable)
+        jjprintex(reflection)
+
     }
 
 
@@ -14,3 +17,4 @@ final class JJToolsTests: XCTestCase {
         ("testExample", testExample),
     ]
 }
+

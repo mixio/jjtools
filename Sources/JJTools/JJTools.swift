@@ -12,6 +12,18 @@ public func jjprint(_ items: Any..., file: String = #file, line: Int = #line) {
     print(items)
 }
 
+public func jjdump(_ items: Any..., file: String = #file, line: Int = #line) {
+    if let path = jjTruncatedPathToSources(file) {
+        let header = """
+        +-----------------------------
+        | 📄 | \(path):\(line)
+        +-----------------------------
+        """
+        print(header)
+    }
+    dump(items)
+}
+
 public func jjprintex(_ items: Any..., file: String = #file, line: Int = #line) {
     if let path = jjTruncatedPathToSources(file) {
         let header = """
@@ -23,10 +35,14 @@ public func jjprintex(_ items: Any..., file: String = #file, line: Int = #line) 
     }
     print(items)
 
-    let stackTrace = Thread.callStackSymbols.joined(separator: "\n")
     print("+-----------------------------")
-    print(stackTrace)
+    let _ = Thread.callStackSymbols.forEach { print($0) }
     print("+-----------------------------")
+
+//    let demangled = CallStackParser.classAndMethodForStackSymbol(Thread.callStackSymbols[2], includeImmediateParentClass: true)
+//    print("+-----------------------------")
+//    print(demangled)
+//    print("+-----------------------------")
 
 }
 
