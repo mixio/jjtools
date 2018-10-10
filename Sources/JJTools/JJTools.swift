@@ -1,23 +1,23 @@
 import Foundation
 
-public func jjprint(_ items: Any..., file: String = #file, line: Int = #line) {
+public func jjprint(_ items: Any..., file: String = #file, line: Int = #line, function: String = #function) {
     if let path = jjTruncatedPathToSources(file) {
         let header = """
-        +-----------------------------
-        | 📄 | \(path):\(line)
-        +-----------------------------
+        +-----------------------------------
+        | 📄 | \(path):\(line) | \(function)
+        +-----------------------------------
         """
         print(header)
     }
     print(items)
 }
 
-public func jjdump(_ items: Any..., file: String = #file, line: Int = #line) {
+public func jjdump(_ items: Any..., file: String = #file, line: Int = #line, function: String = #function) {
     if let path = jjTruncatedPathToSources(file) {
         let header = """
-        +-----------------------------
-        | 📄 | \(path):\(line)
-        +-----------------------------
+        +-----------------------------------
+        | 📄 | \(path):\(line) | \(function)
+        +-----------------------------------
         """
         print(header)
     }
