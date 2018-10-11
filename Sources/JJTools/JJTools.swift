@@ -15,7 +15,7 @@ public func jjprinth(_ items: Any..., file: String = #file, line: Int = #line, f
 public func jjprint(_ items: Any..., file: String = #file, line: Int = #line, function: String = #function) {
     let path = jjTruncatedPathToSources(file)
     let string = String(describing: items)
-    let padding = String(repeating: " ", count: max(79 - string.count, 0))
+    let padding = String(repeating: " ", count: max(119 - string.count, 0))
     print(items, "\(padding) ▶︎ \(path ?? file):\(line) | \(function)")
 }
 
