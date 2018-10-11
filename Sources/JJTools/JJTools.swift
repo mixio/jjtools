@@ -1,6 +1,6 @@
 import Foundation
 
-public func jjprint(_ items: Any..., file: String = #file, line: Int = #line, function: String = #function) {
+public func jjprinth(_ items: Any..., file: String = #file, line: Int = #line, function: String = #function) {
     if let path = jjTruncatedPathToSources(file) {
         let header = """
         +-----------------------------------
@@ -10,6 +10,11 @@ public func jjprint(_ items: Any..., file: String = #file, line: Int = #line, fu
         print(header)
     }
     print(items)
+}
+
+public func jjprint(_ items: Any..., file: String = #file, line: Int = #line, function: String = #function) {
+    let path = jjTruncatedPathToSources(file)
+    print(items, "\(path ?? file):\(line) | \(function)")
 }
 
 public func jjdump(_ items: Any..., file: String = #file, line: Int = #line, function: String = #function) {
