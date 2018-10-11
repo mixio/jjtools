@@ -14,7 +14,7 @@ public func jjprinth(_ items: Any..., file: String = #file, line: Int = #line, f
 
 public func jjprint(_ items: Any..., file: String = #file, line: Int = #line, function: String = #function) {
     let path = jjTruncatedPathToSources(file)
-    print(items, "\(path ?? file):\(line) | \(function)")
+    print(items, "    ▶︎ \(path ?? file):\(line) | \(function)")
 }
 
 public func jjdump(_ items: Any..., file: String = #file, line: Int = #line, function: String = #function) {
