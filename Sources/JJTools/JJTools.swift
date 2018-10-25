@@ -9,7 +9,9 @@ public func jjprinth(_ items: Any..., file: String = #file, line: Int = #line, f
         """
         print(header)
     }
-    print(items)
+    for item in items {
+        print(item)
+    }
 }
 
 public func jjprint(_ items: Any..., file: String = #file, line: Int = #line, function: String = #function) {
