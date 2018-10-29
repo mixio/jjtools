@@ -14,11 +14,32 @@ public func jjprinth(_ items: Any..., file: String = #file, line: Int = #line, f
     }
 }
 
+public func jjprinth(type: Any.Type, _ items: Any..., file: String = #file, line: Int = #line, function: String = #function) {
+    if let path = jjTruncatedPathToSources(file) {
+        let header = """
+        +-----------------------------------
+        | 📄 | \(path):\(line) | \(type).\(function)
+        +-----------------------------------
+        """
+        print(header)
+    }
+    for item in items {
+        print(item)
+    }
+}
+
 public func jjprint(_ items: Any..., file: String = #file, line: Int = #line, function: String = #function) {
     let path = jjTruncatedPathToSources(file)
     let string = String(describing: items)
     let padding = String(repeating: " ", count: max(119 - string.count, 0))
     print(items, "\(padding) ▶︎ \(path ?? file):\(line) | \(function)")
+}
+
+public func jjprint(type: Any.Type, _ items: Any..., file: String = #file, line: Int = #line, function: String = #function) {
+    let path = jjTruncatedPathToSources(file)
+    let string = String(describing: items)
+    let padding = String(repeating: " ", count: max(119 - string.count, 0))
+    print(items, "\(padding) ▶︎ \(path ?? file):\(line) | \(type).\(function)")
 }
 
 public func jjdump(_ items: Any..., file: String = #file, line: Int = #line, function: String = #function) {
@@ -48,10 +69,10 @@ public func jjprintex(_ items: Any..., file: String = #file, line: Int = #line) 
     let _ = Thread.callStackSymbols.forEach { print($0) }
     print("+-----------------------------")
 
-//    let demangled = CallStackParser.classAndMethodForStackSymbol(Thread.callStackSymbols[2], includeImmediateParentClass: true)
-//    print("+-----------------------------")
-//    print(demangled)
-//    print("+-----------------------------")
+    //    let demangled = CallStackParser.classAndMethodForStackSymbol(Thread.callStackSymbols[2], includeImmediateParentClass: true)
+    //    print("+-----------------------------")
+    //    print(demangled)
+    //    print("+-----------------------------")
 
 }
 
@@ -59,16 +80,16 @@ private func jjTruncatedPathToSources(_ path: String) -> String? {
     var pathComponents = path.split(separator: "/")
     var indexOfSources: Array<[String.SubSequence]>.Index? = nil
 
-#if swift(>=4.2)
+    #if swift(>=4.2)
     indexOfSources = pathComponents.firstIndex(of: "Sources")
-#else
+    #else
     for (index, component) in pathComponents.enumerated() {
-        if component == "Sources" {
-            indexOfSources = index
-            break
-        }
+    if component == "Sources" {
+    indexOfSources = index
+    break
     }
-#endif
+    }
+    #endif
 
     if let indexOfSources = indexOfSources {
         pathComponents.removeFirst(indexOfSources + 1)
