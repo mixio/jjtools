@@ -40,11 +40,11 @@ public func jjprint(_ items: Any..., file: String = #file, line: Int = #line, fu
 public func jjprint(type: Any.Type, _ items: Any..., file: String = #file, line: Int = #line, function: String = #function) {
     //let path = jjTruncatedPathToSources(file)
     let path = URL(fileURLWithPath: file).lastPathComponent
-    let string = String(describing: items)
-    let padding = String(repeating: " ", count: max(119 - string.count, 0))
+    let typeFunction = "\(type).\(function)"
+    let functionPadding = String(repeating: " ", count: max(60 - typeFunction.count, 0))
     let filePath = "\(path):\(line)"
     let filePadding = String(repeating: " ", count: max(60 - filePath.count, 0))
-    print(items, "\(padding) ▶︎ \(filePath) \(filePadding) | \(type).\(function)")
+    print("\(filePath)\(filePadding) | \(typeFunction)\(functionPadding) ▶︎ ", items)
 }
 
 public func jjdump(_ items: Any..., file: String = #file, line: Int = #line, function: String = #function) {
