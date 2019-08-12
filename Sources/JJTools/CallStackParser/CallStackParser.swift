@@ -44,7 +44,7 @@ class CallStackParser {
                 range: nil
             )
             let packageComponent = String(packageClassAndMethodStr.split(separator: " ").first!)
-            var packageClassAndMethod = packageComponent.split(separator: ".")
+            let packageClassAndMethod = packageComponent.split(separator: ".")
             let numberOfComponents = packageClassAndMethod.count
             if (numberOfComponents >= 2) {
                 let method = CallStackParser.cleanMethod(method: String(packageClassAndMethod[numberOfComponents-1]))
